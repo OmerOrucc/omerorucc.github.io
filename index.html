@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ömer Faruk Oruç | Software & AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --tag-bg: #1e293b;
+      --tag-text: #93c5fd;
+      --success: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0 1.5rem;
+    }
+
+    /* Dil Görünürlük Kontrolü */
+    body.lang-tr .lang-en { display: none !important; }
+    body.lang-en .lang-tr { display: none !important; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 0 6rem 0;
+    }
+
+    /* Top Navigation / Language Switch */
+    .top-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      padding: 0.25rem;
+      gap: 0.25rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Hero Section */
+    .hero { margin-bottom: 4.5rem; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+    .btn-secondary:hover { background: #1f2937; transform: translateY(-1px); }
+
+    /* Section Headings */
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); border-color: #374151; }
+    .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; color: #fff; }
+    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+    }
+    .card-actions { display: flex; gap: 0.75rem; }
+    .card-actions .btn { padding: 0.5rem 0.9rem; font-size: 0.85rem; }
+
+    /* Skills */
+    .skills-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 5rem;
+    }
+    .skills-category { margin-bottom: 1.5rem; }
+    .skills-category:last-child { margin-bottom: 0; }
+    .skills-category h4 {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .pill {
+      background: #1f2937;
+      color: var(--text-main);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid #374151;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 2rem;
+    }
+  </style>
+</head>
+<body class="lang-tr">
+
+  <div class="container">
+    <!-- Top Nav / Language Switcher -->
+    <nav class="top-nav">
+      <div class="lang-switcher">
+        <button class="lang-btn active" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      
+      <h1>Ömer Faruk Oruç</h1>
+      
+      <!-- Bio -->
+      <p class="lang-tr">
+        Bilgisayar Mühendisi
+      </p>
+      <p class="lang-en">
+        Computer Engineer
+      </p>
+
+      <div class="links">
+        <a href="https://github.com/OmerOrucc" target="_blank" class="btn btn-secondary">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/ömer-faruk-o-7a19a5ba/" target="_blank" class="btn btn-secondary">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </header>
+
+    <!-- Projects -->
+    <section>
+      <h2>
+        <span class="lang-tr">🚀 Öne Çıkan Canlı Projeler</span>
+        <span class="lang-en">🚀 Featured Live Projects</span>
+      </h2>
+      <div class="projects-grid">
+        
+        <!-- Project 1: Financial AI Agent -->
+        <div class="card">
+          <div>
+            <h3>📈 Financial AI Analyst & Forecaster</h3>
+            <p class="lang-tr">
+              Hisse senedi fiyatlarını tahmin eden Derin Öğrenme (GRU) modeli ile şirket bilançolarını (PDF) analiz eden Dinamik RAG vektör mimarisini birleştiren hibrit finansal yapay zekâ asistanı. Çift dilli (TR/EN) arayüz desteği içerir.
+            </p>
+            <p class="lang-en">
+              A hybrid financial AI assistant integrating a Deep Learning (GRU) price forecasting model with a Dynamic RAG vector pipeline for balance sheet (PDF) analysis. Features dual-language UI support.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Deep Learning</span>
+              <span class="tag">LangChain</span>
+              <span class="tag">FAISS RAG</span>
+              <span class="tag">Groq API</span>
+              <span class="tag">Streamlit Cloud</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="https://financial-ai-bot.streamlit.app" target="_blank" class="btn btn-primary">
+              <span class="lang-tr">Canlı Demo ↗</span>
+              <span class="lang-en">Live Demo ↗</span>
+            </a>
+            <a href="https://github.com/OmerOrucc/financial-ai-agent" target="_blank" class="btn btn-secondary">
+              <span class="lang-tr">Kodlar</span>
+              <span class="lang-en">Source</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Fake News Detector -->
+        <div class="card">
+          <div>
+            <h3>📰 Hybrid Fake News Detector & Verifier</h3>
+            <p class="lang-tr">
+              Canlı haber API'si ile Destek Vektör Makineleri (SVM) ve TF-IDF doğal dil işleme modelini birleştiren sahte haber doğrulama platformu. Haber ajanslarında doğrulanmayan içerikleri makine öğrenmesi katmanıyla analiz eder.
+            </p>
+            <p class="lang-en">
+              A fake news verification platform combining live accredited news API verification with a Support Vector Machine (SVM) + TF-IDF model. Analyzes unverified claims via an ML classification fallback.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Scikit-Learn (SVM)</span>
+              <span class="tag">NLP & NLTK</span>
+              <span class="tag">REST API</span>
+              <span class="tag">Streamlit Cloud</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="https://detect-news.streamlit.app/" target="_blank" class="btn btn-primary">
+              <span class="lang-tr">Canlı Demo ↗</span>
+              <span class="lang-en">Live Demo ↗</span>
+            </a>
+            <a href="https://github.com/OmerOrucc/fake-news-detector" target="_blank" class="btn btn-secondary">
+              <span class="lang-tr">Kodlar</span>
+              <span class="lang-en">Source</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>
+        <span class="lang-tr">🛠️ Yetenekler & Teknolojiler</span>
+        <span class="lang-en">🛠️ Skills & Technologies</span>
+      </h2>
+      <div class="skills-box">
+        <div class="skills-category">
+          <h4>
+            <span class="lang-tr">Yapay Zekâ & Veri Bilimi</span>
+            <span class="lang-en">Artificial Intelligence & Data Science</span>
+          </h4>
+          <div class="skill-pills">
+            <span class="pill">Deep Learning</span>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">RAG & Vector DB (FAISS)</span>
+            <span class="pill">LangChain & Agentic Workflows</span>
+            <span class="pill">NLP (NLTK, Scikit-Learn)</span>
+            <span class="pill">TensorFlow</span>
+            <span class="pill">Time-Series Forecasting</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h4>
+            <span class="lang-tr">Backend & Yazılım Geliştirme</span>
+            <span class="lang-en">Backend & Software Engineering</span>
+          </h4>
+          <div class="skill-pills">
+            <span class="pill">Python</span>
+            <span class="pill">FastAPI</span>
+            <span class="pill">REST API Design</span>
+            <span class="pill">Streamlit</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h4>
+            <span class="lang-tr">Araçlar, DevOps & Altyapı</span>
+            <span class="lang-en">Tools, DevOps & Infrastructure</span>
+          </h4>
+          <div class="skill-pills">
+            <span class="pill">Git & GitHub</span>
+            <span class="pill">Docker & Docker Compose</span>
+            <span class="pill">Cloud Deployment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p class="lang-tr">© 2026 Ömer Faruk Oruç</p>
+      <p class="lang-en">© 2026 Ömer Faruk Oruç</p>
+    </footer>
+  </div>
+
+  <script>
+    function setLanguage(lang) {
+      document.body.className = 'lang-' + lang;
+      localStorage.setItem('pref_lang', lang);
+      
+      document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    }
+
+    // Tarayıcı hafızasındaki dili hatırla (Varsayılan: TR)
+    (function initLang() {
+      const saved = localStorage.getItem('pref_lang') || 'tr';
+      setLanguage(saved);
+    })();
+  </script>
+</body>
+</html>
